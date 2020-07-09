@@ -19,14 +19,20 @@ const MyApp = ({ Component, pageProps }) => {
   );
 };
 
-MyApp.getInitialProps = async (context) => {
-  console.log('GET INITIAL PROPS _APP');
-  const initialProps =
-    App.getInitialProps && (await App.getInitialProps(context));
+/* 
+  Next.js는 getInitialProps가 호출되지 않는 페이지는 
+  static file로 만들어 최적화 시켜준다.
+  이 기능을 이용하고 싶다면 전체 컴포넌트에 적용되는 _app.js의 getInitialProps를 사용하지 않아야 한다
+*/
 
-  return {
-    pageProps: { appData: 'Hello _App Component', ...initialProps.pageProps },
-  };
-};
+// MyApp.getInitialProps = async (context) => {
+//   console.log('GET INITIAL PROPS _APP');
+//   const initialProps =
+//     App.getInitialProps && (await App.getInitialProps(context));
+
+//   return {
+//     pageProps: { appData: 'Hello _App Component', ...initialProps.pageProps },
+//   };
+// };
 
 export default MyApp;
