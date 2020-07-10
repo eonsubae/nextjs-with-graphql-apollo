@@ -11,28 +11,37 @@ const handle = app.getRequestHandler();
 const data = {
   portfolios: [
     {
-      _id: '32das7d89',
-      title: 'Job in USA',
-      content: 'It was very nice experience',
-      jobTitle: 'Chef',
-      daysOfExperience: 100,
-      isCurrentlyEmployed: false,
+      _id: 'sad87da79',
+      title: 'Job in Netcentric',
+      company: 'Netcentric',
+      companyWebsite: 'www.google.com',
+      location: 'Spain, Barcelona',
+      jobTitle: 'Engineer',
+      description: 'Doing something, programing....',
+      startDate: '01/01/2014',
+      endDate: '01/01/2016',
     },
     {
-      _id: '21qw1c31e123',
-      title: 'Job in Barcelona',
-      content: 'It was very sunny experience',
-      jobTitle: 'Developer',
-      daysOfExperience: 133,
-      isCurrentlyEmployed: true,
+      _id: 'da789ad1',
+      title: 'Job in Siemens',
+      company: 'Siemens',
+      companyWebsite: 'www.google.com',
+      location: 'Slovakia, Kosice',
+      jobTitle: 'Software Engineer',
+      description: 'Responsoble for parsing framework for JSON medical data.',
+      startDate: '01/01/2011',
+      endDate: '01/01/2013',
     },
     {
-      _id: '1bwc11456',
-      title: 'Job in Germany',
-      content: 'It was very good experience',
-      jobTitle: 'Manager',
-      daysOfExperience: 30,
-      isCurrentlyEmployed: true,
+      _id: 'sadcxv9',
+      title: 'Work in USA',
+      company: 'WhoKnows',
+      companyWebsite: 'www.google.com',
+      location: 'USA, Montana',
+      jobTitle: 'Housekeeping',
+      description: 'So much responsibility....Overloaaaaaad',
+      startDate: '01/01/2010',
+      endDate: '01/01/2011',
     },
   ],
 };
@@ -45,10 +54,13 @@ app.prepare().then(() => {
     type Portfolio {
       _id: ID!
       title: String
-      content: String
-      jobTitle: String,
-      daysOfExperience: Int,
-      isCurrentlyEmployed: Boolean
+      company: String
+      companyWebsite: String
+      location: String
+      jobTitle: String
+      description: String
+      startDate: String
+      endDate: String
     }
 
     type Query {
