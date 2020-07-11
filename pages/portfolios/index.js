@@ -4,6 +4,38 @@ import axios from 'axios';
 
 import PortfolioCard from '@/components/portfolios/PortfolioCard';
 
+const graphUpdatePortfolio = (id) => {
+  const query = `
+  mutation UpdatePortfolio {
+    updatePortfolio(id: "${id}", input: {
+      title: "Updated title"
+      company: "Updated company"
+      companyWebsite: "Updated website"
+      location: "Updated location"
+      jobTitle: "Updated jobtitle"
+      description: "Updated Description"
+      startDate: "12/12/2012"
+      endDate: "14/11/2013"
+    }) {
+      _id,
+      title,
+      company,
+      companyWebsite,
+      location,
+      jobTitle,
+      description,
+      startDate,
+      endDate
+    }
+  }
+  `;
+
+  return axios
+    .post('http://localhost:3000/graphql', { query })
+    .then(({ data: graph }) => graph.data)
+    .then((data) => data.updatePortfolio);
+};
+
 const graphCreatePortfolio = () => {
   const query = `
   mutation CreatePortfolio {
@@ -69,6 +101,14 @@ const Portfolios = ({ data }) => {
     setPortfolios(newPortfolios);
   };
 
+  const updatePortfolio = async (id) => {
+    const updatedPortfolio = await graphUpdatePortfolio(id);
+    const index = portfolios.findIndex((portfolio) => portfolio._id === id);
+    const newPortfolios = portfolios.slice();
+    newPortfolios[index] = updatedPortfolio;
+    setPortfolios(newPortfolios);
+  };
+
   return (
     <>
       <section className="section-title">
@@ -90,6 +130,12 @@ const Portfolios = ({ data }) => {
                   <PortfolioCard portfolio={portfolio} />
                 </a>
               </Link>
+              <button
+                className="btn btn-warning"
+                onClick={() => updatePortfolio(portfolio._id)}
+              >
+                Update Portfolio
+              </button>
             </div>
           ))}
         </div>
