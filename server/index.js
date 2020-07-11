@@ -10,6 +10,7 @@ const handle = app.getRequestHandler();
 
 // resolvers
 const { portfolioResolvers } = require('./graphql/resolvers');
+console.log(portfolioResolvers);
 // types
 const { portfolioTypes } = require('./graphql/types');
 
@@ -24,6 +25,10 @@ app.prepare().then(() => {
       hello: String
       portfolio(id: ID): Portfolio
       portfolios: [Portfolio]
+    }
+
+    type Mutation {
+      createPortfolio(input: PortfolioInput): Portfolio
     }
   `);
 
