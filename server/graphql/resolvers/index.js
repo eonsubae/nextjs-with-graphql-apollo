@@ -60,4 +60,11 @@ exports.portfolioMutations = {
     data.portfolios[index] = newPortfolio;
     return newPortfolio;
   },
+  deletePortfolio: (root, { id }) => {
+    const index = data.portfolios.findIndex(
+      (portfolio) => portfolio._id === id
+    );
+    data.portfolios.splice(index, 1);
+    return id;
+  },
 };

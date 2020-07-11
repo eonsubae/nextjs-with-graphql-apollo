@@ -4,6 +4,19 @@ import axios from 'axios';
 
 import PortfolioCard from '@/components/portfolios/PortfolioCard';
 
+const graphDeletePortfolio = (id) => {
+  const query = `
+  mutation DeletePortfolio {
+    deletePortfolio(id: "${id}")
+  }
+  `;
+
+  return axios
+    .post('http://localhost:3000/graphql', { query })
+    .then(({ data: graph }) => graph.data)
+    .then((data) => data.deletePortfolio);
+};
+
 const graphUpdatePortfolio = (id) => {
   const query = `
   mutation UpdatePortfolio {
@@ -109,6 +122,16 @@ const Portfolios = ({ data }) => {
     setPortfolios(newPortfolios);
   };
 
+  const deletePortfolio = async (id) => {
+    const deletedPortfolioId = await graphDeletePortfolio(id);
+    const index = portfolios.findIndex(
+      (portfolio) => portfolio._id === deletedPortfolioId
+    );
+    const newPortfolios = portfolios.slice();
+    newPortfolios.splice(index, 1);
+    setPortfolios(newPortfolios);
+  };
+
   return (
     <>
       <section className="section-title">
@@ -135,6 +158,12 @@ const Portfolios = ({ data }) => {
                 onClick={() => updatePortfolio(portfolio._id)}
               >
                 Update Portfolio
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => deletePortfolio(portfolio._id)}
+              >
+                Delete Portfolio
               </button>
             </div>
           ))}
