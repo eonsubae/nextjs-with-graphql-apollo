@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import withApollo from '@/hoc/withApollo';
+import { getDataFromTree } from '@apollo/react-ssr';
 
 import PortfolioCard from '@/components/portfolios/PortfolioCard';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
@@ -146,4 +148,4 @@ const Portfolios = () => {
   );
 };
 
-export default Portfolios;
+export default withApollo(Portfolios, { getDataFromTree });
