@@ -1,3 +1,5 @@
+const Portfolio = require('../../database/models/portfolio');
+
 const data = {
   portfolios: [
     {
@@ -37,10 +39,8 @@ const data = {
 };
 
 exports.portfolioQueries = {
-  hello: () => 'Hello World',
-  portfolio: (root, { id }) =>
-    data.portfolios.find((portfolio) => portfolio._id === id),
-  portfolios: () => data.portfolios,
+  portfolio: (root, { id }) => Portfolio.findById(id),
+  portfolios: () => Portfolio.find({}),
 };
 
 exports.portfolioMutations = {
